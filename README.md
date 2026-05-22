@@ -2,9 +2,15 @@
 
 An attempt to re-create Backstab and Parry mod in an SKSE plugin
 
+This plugin was entirely made by Gemini AI. The reason i do this so that i can at least get a cool killmove finisher when Skyrim decides to not doing it, even with the help from Violens - Killmove mod.
+
+I told AI to take Critical Hit - Backstab and Parry in Skyrim Special Edition (https://www.nexusmods.com/skyrimspecialedition/mods/17400) as a reference. And Valhalla Combat for how it should do/trigger a kill move.
+
 ## What this mod do
 - Backstab an enemy from behind (within a 120-degree rear cone) will trigger a vanilla backstab killmove animation.
 - Power bash an enemy when they winding up their attack would cause stagger and a vulnerable state to them. Doing a follow-up attack would trigger random vanilla killmove animation, including decapitation.
+
+Note that the killmove animation would instantly kill the target, even if their health point has an absurd amount. So, it won't work on Essential Flagged target.
 
 ## How It Works (SKSE/C++ Implementation) | Summarized by AI
 This mod completely avoids Papyrus virtual machine polling in favor of a native C++ event-driven architecture. 
