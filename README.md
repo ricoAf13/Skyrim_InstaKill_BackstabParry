@@ -16,7 +16,7 @@ Note that the killmove animation would instantly kill the target, even if their 
 This mod completely avoids Papyrus virtual machine polling in favor of a native C++ event-driven architecture. 
 1. **Event Hooking**: The plugin hooks `BSAnimationGraphEvent` for both the Player and NPCs. It maps specific string events (like `weaponSwing`, `AttackStop`, and `bashStart`) to track exactly when an NPC is vulnerable and when the player is executing an attack.
 2. **Combat Interception**: We utilize a `RE::BSTEventSink<RE::TESHitEvent>` to detect when the player's bash connects with an enemy during their mapped parry window. 
-3. **Engine-Level Paired Animations**: Executions are triggered using Skyrim's native `Offset::playPairedIdle` engine function. Depending on the attacker's weapon type and target's race/position, the C++ logic dynamically selects the correct Valhalla Nemesis paired animation event (e.g., `pa_Execution1hm` or `pa_BackAttack2hm`) and binds the executor and victim together perfectly in engine memory.
+3. **Engine-Level Paired Animations**: Executions are triggered using Skyrim's native `Offset::playPairedIdle` engine function. Thanks to Valhalla combat.
 
 ## Requirements
 To use this mod, you will need the following installed:
