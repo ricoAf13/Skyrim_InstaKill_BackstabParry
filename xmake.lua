@@ -2,7 +2,7 @@ set_xmakever('3.0.1')
 includes('lib/commonlibsse-ng')
 
 set_project('BackstabParry')
-set_version('0.0.1')
+set_version('0.0.5')
 set_license('GPL-3.0')
 
 set_languages('c++23')
@@ -49,7 +49,7 @@ target('BackstabParry')
     add_rules('commonlibsse-ng.plugin', {
         name        = 'BackstabParry',
         author      = 'RicoAf',
-        description = 'No description provided.',
+        description = 'Figuring out how to parry/backstab without actuall kills',
         runtime     = runtime
     })
 

@@ -1,46 +1,24 @@
-# PrismaUI SKSE Plugin Template
+# Backstab and Parry (SKSE)
 
-This is a basic plugin template using PrismaUI and CommonLibSSE-NG.
+A lightweight, highly performant SKSE plugin for Skyrim Special Edition that introduces non-lethal Backstab and Parry execution mechanics. This mod builds on the foundation of Valhalla Combat's paired animation framework to deliver smooth, cinematic combat ripostes without relying on slow Papyrus scripts.
 
-> **You can download ready-to-use plugin for MO2 here: [Download PrismaUI-Example-Plugin](https://github.com/PrismaUI-SKSE/PrismaUI-Wiki/releases)**
+## Features
+- **Parry Mechanics**: Intercept an enemy's attack by bashing them during their active attack frame (parry window). Successfully parrying will stagger the enemy, rendering them vulnerable to a frontal execution.
+- **Backstab Mechanics**: Attacking an enemy from behind (within a 120-degree rear cone) will trigger a cinematic backstab execution.
+- **Non-Lethal Executions**: Unlike vanilla kill moves, these paired execution animations apply a chunk of bonus damage but do not instantly kill the enemy, allowing for true combat ripostes that seamlessly return you to the fight if the enemy survives.
 
-### Requirements
-* [XMake](https://xmake.io) [2.8.2+]
-* C++23 Compiler (MSVC, Clang-CL)
+## How It Works (SKSE/C++ Implementation)
+This mod completely avoids Papyrus virtual machine polling in favor of a native C++ event-driven architecture. 
+1. **Event Hooking**: The plugin hooks `BSAnimationGraphEvent` for both the Player and NPCs. It maps specific string events (like `weaponSwing`, `AttackStop`, and `bashStart`) to track exactly when an NPC is vulnerable and when the player is executing an attack.
+2. **Combat Interception**: We utilize a `RE::BSTEventSink<RE::TESHitEvent>` to detect when the player's bash connects with an enemy during their mapped parry window. 
+3. **Engine-Level Paired Animations**: Executions are triggered using Skyrim's native `Offset::playPairedIdle` engine function. Depending on the attacker's weapon type and target's race/position, the C++ logic dynamically selects the correct Valhalla Nemesis paired animation event (e.g., `pa_Execution1hm` or `pa_BackAttack2hm`) and binds the executor and victim together perfectly in engine memory.
 
-## Getting Started
-```bat
-git clone --recurse-submodules https://github.com/PrismaUI-SKSE/PrismaUI-Example-Plugin.git
-```
+## Requirements
+To use this mod, you will need the following installed:
+1. **Skyrim Script Extender (SKSE64)**: https://skse.silverlock.org/ / https://www.nexusmods.com/skyrimspecialedition/mods/30379
+2. **Address Library for SKSE Plugins**: https://www.nexusmods.com/skyrimspecialedition/mods/32444
+3. **Valhalla Combat**: https://www.nexusmods.com/skyrimspecialedition/mods/64741 *(Required for the ValhallaCombat.esp and behavior files)*
 
-### Build
-To build the project, run the following command:
-```bat
-xmake build
-```
-
-> Don't forget to move `view/index.html` to your plugin folder in `PrismaUI/PrismaUI-Example-UI/index.html`.
-
-> ***Note:*** *This will generate a `build/windows/` directory in the **project's root directory** with the build output.*
-
-### Project Generation (Optional)
-If you want to generate a Visual Studio project, run the following command:
-```bat
-xmake project -k vsxmake
-```
-
-> ***Note:*** *This will generate a `vsxmakeXXXX/` directory in the **project's root directory** using the latest version of Visual Studio installed on the system.*
-
-### Upgrading Packages (Optional)
-If you want to upgrade the project's dependencies, run the following commands:
-```bat
-xmake repo --update
-xmake require --upgrade
-```
-
-### Build Output (Optional)
-If you want to redirect the build output, set one of or both of the following environment variables:
-
-- Path to a Skyrim install folder: `XSE_TES5_GAME_PATH`
-
-- Path to a Mod Manager mods folder: `XSE_TES5_MODS_PATH`
+## Compatibility
+- Supported Versions: **Skyrim Special Edition (SE)** and **Anniversary Edition (AE)**.
+- **Not Supported**: Skyrim VR is currently **NOT** supported.
