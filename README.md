@@ -6,6 +6,8 @@ This plugin was entirely made by Gemini AI. The reason i do this so that i can a
 
 I told AI to take Critical Hit - Backstab and Parry in Skyrim Special Edition (https://www.nexusmods.com/skyrimspecialedition/mods/17400) as a reference. And Valhalla Combat for how it should do/trigger a kill move.
 
+I hope ynyone with the proper knowledge would use this as a reference to make the proper Backstab and Parry mod for Skyrim.
+
 ## What this mod do
 - Backstab an enemy from behind (within a 120-degree rear cone) will trigger a vanilla backstab killmove animation.
 - Power bash an enemy when they winding up their attack would cause stagger and a vulnerable state to them. Doing a follow-up attack would trigger random vanilla killmove animation, including decapitation.
